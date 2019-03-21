@@ -5,11 +5,11 @@ import Output from '../Output';
 class Layout extends Component {
     render() {
         return (
-        <div>
-            <Input />
-            <Output />
-        </div>
-        )
+            <div>
+                <Input />
+                <Output />
+            </div>
+        );
     }
 }
 
