@@ -9,19 +9,23 @@ class Input extends Component {
         }
 
         this.handleChange = this.handleChange.bind(this);
+        this.handleSubmit = this.handleSubmit.bind(this);
     }
 
     handleChange(event) {
-        /*this.setState({
+        this.setState({
             budget: event.target.value
-        });*/
-        console.log(event.target.value);
+        });
+    }
+
+    handleSubmit(event) {
+        localStorage.setItem('budget',this.state.budget);
     }
 
     render() {
         return (
             <div>
-                <form>
+                <form onSubmit={this.handleSubmit}>
                     <div className="row justify-content-md-center">
                         <div className="col-sm-8">
                             <h3>Il mio budget</h3>
