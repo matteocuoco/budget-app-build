@@ -14,7 +14,7 @@
 importScripts("https://storage.googleapis.com/workbox-cdn/releases/3.6.3/workbox-sw.js");
 
 importScripts(
-  "/matteocuoco/budget-app-build/precache-manifest.3448fb51ed8f74baa6d157c39135bc9f.js"
+  "/budget-app-build/precache-manifest.54008209dd3cd0797147290bff3e9a78.js"
 );
 
 workbox.clientsClaim();
@@ -28,7 +28,7 @@ self.__precacheManifest = [].concat(self.__precacheManifest || []);
 workbox.precaching.suppressWarnings();
 workbox.precaching.precacheAndRoute(self.__precacheManifest, {});
 
-workbox.routing.registerNavigationRoute("/matteocuoco/budget-app-build/index.html", {
+workbox.routing.registerNavigationRoute("/budget-app-build/index.html", {
   
   blacklist: [/^\/_/,/\/[^\/]+\.[^\/]+$/],
 });
