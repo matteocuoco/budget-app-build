@@ -4,6 +4,9 @@ class Output extends Component {
 
     render() {
         
+        var valoreBudget = 0;
+        valoreBudget = JSON.parse(localStorage.getItem('budget'));
+
         if ( localStorage.getItem('listaSpese') ) {
             
             var nomeHtml = '';
@@ -12,7 +15,6 @@ class Output extends Component {
             var spesaParagraphs = [];
             var spesaTotale = '';
             var spesaImporti = [];
-            var valoreBudget = 0;
             var residuo = 0;
             var totaleSpese = 0;
 
@@ -31,14 +33,10 @@ class Output extends Component {
             spesaHtml = spesaParagraphs.join('');
             spesaTotale = spesaImporti.join('+');
 
-            valoreBudget = JSON.parse(localStorage.getItem('budget')); //eslint-disable-next-line
+             //eslint-disable-next-line
             totaleSpese = eval(spesaTotale);  
             residuo = valoreBudget - totaleSpese;
 
-            console.log(document.getElementById('residuo'));
-            /*if ( residuo < 0 ) {
-                residuoParagraph.classList.add('red');
-            }*/
         }
 
 
@@ -47,14 +45,14 @@ class Output extends Component {
                 <h3>Riepilogo</h3>                
                 <div className="container-fluid">
                     <div className="row justify-content-md-center">
-                        <div className="col-sm-4">
+                        <div className="col-6">
                             <h5>Spesa</h5>
                             <div dangerouslySetInnerHTML={{
                                 __html: nomeHtml
                             }}>
                             </div>
                         </div>
-                        <div className="col-sm-4">
+                        <div className="col-6">
                             <h5>Importo</h5>
                             <div dangerouslySetInnerHTML={{
                                 __html: spesaHtml

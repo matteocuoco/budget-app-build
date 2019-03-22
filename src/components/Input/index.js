@@ -15,6 +15,7 @@ class Input extends Component {
         this.handleChangeNome = this.handleChangeNome.bind(this);
         this.handleChangeSpesa = this.handleChangeSpesa.bind(this);
         this.handleSubmitSpesa = this.handleSubmitSpesa.bind(this);
+        this.resetAll = this.resetAll.bind(this);
     }
 
     handleChangeBudget(event) {
@@ -24,7 +25,9 @@ class Input extends Component {
     }
 
     handleSubmitBudget(event) {
-        localStorage.setItem('budget',this.state.budget);
+        if ( this.state.budget !== 0 ) {
+            localStorage.setItem('budget',this.state.budget)
+        };
     }
 
     handleChangeNome(event) {
@@ -40,13 +43,22 @@ class Input extends Component {
     }
 
     handleSubmitSpesa(event) {
-        if ( !localStorage.getItem('listaSpese') ) {
-            localStorage.setItem('listaSpese', JSON.stringify([this.state.nome, this.state.spesa]));
-        } else {
-            const oldListaSpese = JSON.parse(localStorage.getItem('listaSpese'));
-            localStorage.setItem('listaSpese', JSON.stringify([...oldListaSpese, this.state.nome, this.state.spesa]));
-        }
+        if ( this.state.nome !== '' && this.state.spesa !== 0 ) {
+            if ( !localStorage.getItem('listaSpese') ) {
+                localStorage.setItem('listaSpese', JSON.stringify([this.state.nome, this.state.spesa]));
+            } else {
+                const oldListaSpese = JSON.parse(localStorage.getItem('listaSpese'));
+                localStorage.setItem('listaSpese', JSON.stringify([...oldListaSpese, this.state.nome, this.state.spesa]));
+            }
+        };
     }
+
+    resetAll() {
+        localStorage.removeItem('budget');
+        localStorage.removeItem('listaSpese');
+        window.location.reload();
+    }
+
 
     render() {
         return (
@@ -54,7 +66,7 @@ class Input extends Component {
                 <form onSubmit={this.handleSubmitBudget}>
                     <h3>Il mio budget</h3>
                     <div className="row justify-content-md-center">
-                        <div className="col-sm-4">
+                        <div className="col-6">
                             <input
                                 type="number"
                                 className="form-control"
@@ -64,7 +76,7 @@ class Input extends Component {
                                 onChange={this.handleChangeBudget}
                             />
                         </div>
-                        <div className="col-sm-4">
+                        <div className="col-6">
                             <button type="submit" className="btn btn-primary btn-sm btn-block">Invia</button>
                         </div>
                     </div>
@@ -72,7 +84,7 @@ class Input extends Component {
                 <form onSubmit={this.handleSubmitSpesa}>
                     <h3>Le mie spese</h3>
                     <div className="row justify-content-md-center">
-                        <div className="col-sm-4">
+                        <div className="col-6">
                             <input
                                 type="text"
                                 className="form-control"
@@ -82,7 +94,7 @@ class Input extends Component {
                                 onChange={this.handleChangeNome}
                             />
                         </div>
-                        <div className="col-sm-4">
+                        <div className="col-6">
                             <input
                                 type="number"
                                 className="form-control"
@@ -94,11 +106,16 @@ class Input extends Component {
                         </div>
                     </div>
                     <div className="row justify-content-md-center">
-                        <div className="col-sm-8">
+                        <div className="col-6 m-auto">
                             <button type="submit" className="btn btn-primary btn-sm btn-block">Invia</button>
                         </div>
                     </div>
                 </form>
+                <div className="row justify-content-md-center">
+                    <div className="col-6 m-auto">
+                        <button type="submit" className="btn btn-primary btn-sm btn-block" onClick={this.resetAll}>Reset</button>
+                    </div>
+                </div>
             </div>
         )
     }
